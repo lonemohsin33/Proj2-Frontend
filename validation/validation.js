@@ -30,6 +30,7 @@ function validatename(input){
     }
 }
 const collegeValidation = async (req,res,next)=> {
+    res.setHeader("Access-Control-Allow-Origin", "*")
     try{
 
         let data = req.body
@@ -92,6 +93,7 @@ catch(err){
     
 }
 const internValidation = async (req,res,next)=> {
+    res.setHeader("Access-Control-Allow-Origin", "*")
     try{
 
         let data = req.body

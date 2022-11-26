@@ -17,6 +17,7 @@ const createCollege = async (req,res)=>{
 // =================get interns data with college details==========
 
 const getColleges = async (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "*")
     try {
         let collegeName = req.query.collegeName;
         if (!collegeName) {
@@ -45,17 +46,13 @@ const getColleges = async (req, res) => {
 
         const collegeId = collegeData ["_id"]
         const internData = await internModel.find({ collegeId: collegeId })
-        if (internData.length ==0) {
-            return res.status(400).send({ status: false, message: "there is no intern from this college "})
-        }
+        res.status(200).send({ status: true, data:{name: collegeData.name,
+                fullName: collegeData.fullName,
+                logoLink: collegeData.logoLink,
+                interns: internData}})
+        
 
-        let data = {
-            name: collegeData.name,
-            fullName: collegeData.fullName,
-            logoLink: collegeData.logoLink,
-            interns: internData
-        }
-        return res.status(200).send({ status: true, message: data})
+        
 
        
     } catch(err) {
